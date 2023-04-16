@@ -1,0 +1,21 @@
+.message {
+	margin: 8px;
+	padding: 16px 16px 0;
+	border: 1px solid #000;
+}
+
+.default {
+	background-color: #958484;
+}
+
+.info {
+	background-color: #fefe4d;
+}
+
+.error {
+	background-color: #fe4d4d;
+}
+
+.success {
+	background-color: #4dfe4d;
+}
