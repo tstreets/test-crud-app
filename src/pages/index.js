@@ -1,21 +1,19 @@
 import React from 'react';
 import useFirebase from '../useHooks/useFirebase';
 import Message from '../components/Message';
+import useGlobalValues from '../useHooks/useGlobalValues';
 
 export default function HomePage() {
-	const [gamesList, setGamesList] = React.useState([]);
-	const [error, setError] = React.useState('');
 	const firebase = useFirebase();
+	const { gamesList, update, error } = useGlobalValues();
 
 	async function loadGames() {
 		try {
 			if (!firebase.currentUser.email) throw { name: 'Auth Issue', code: 'access-denied' };
 			const games = await firebase.getGames();
-			setGamesList(games);
-			setError(``);
+			update({ gamesList: games, error: '' });
 		} catch (e) {
-			setGamesList([]);
-			setError(`${e.name} (${e.code}): You need to login to load the games.`);
+			update({ gamesList: [], error: `${e.name} (${e.code}): You need to login to load the games.` });
 		}
 	}
 
